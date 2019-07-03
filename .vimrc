@@ -28,13 +28,19 @@ let g:racer_cmd = "/usr/bin/racer"
 let g:racer_experimental_completer = 1
 
 " vim-clang
-let g:clang_library_path = '/usr/lib64/llvm'
-let g:clang_c_options = '-std=gnu11'
-let g:clang_cpp_options = '-std=c++11 -stdlib=libc++'
+let g:clang_library_path = "/usr/lib64/llvm"
+let g:clang_c_options = '--std=gnu11'
+let g:clang_cpp_options = '--std=c++11 --stdlib=libc++'
 
 " vim-taglist
 let Tlist_Use_Right_Window = 1
+let Tlist_Compact_Form = 1
+let Tlist_GainFocus_On_ToggleOpen = 1
+let Tlist_Close_On_Select = 1
 let Tlist_sci_settings = 'scilab;f:function'
+
+" vim-latexbox
+let g:LatexBox_viewer = '/usr/bin/zathura --fork'
 
 " nim-vim
 fun! JumpToDef()
@@ -106,12 +112,8 @@ if has('mouse')
 endif
 
 " automatically open and close the popup menu / preview window
-autocmd CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,menu,longest,preview
-
-" don't use hiragana EVER
-set iminsert=0
-set imsearch=-1
 
 """"""""""""""""""""""""""""""""""Mappings"""""""""""""""""""""""""""""""""""""
 " NERDTree
@@ -124,7 +126,6 @@ nnoremap <silent> <F3> :TlistToggle<CR>
 " With this maps you can now toggle the terminal
 nnoremap <F4> :call MonkeyTerminalToggle()<cr>
 tnoremap <F4> <C-\><C-n>:call MonkeyTerminalToggle()<cr>
-
 
 " vim-a
 nnoremap <silent> <F5> :A<CR>
@@ -142,7 +143,6 @@ let g:session_directory="~/.vim/session"
 
 " use TAB for autocomplete
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
-"inoremap <C-tab> <c-r>=InsertTabWrapper()<cr>
 
 " use ctrl-[hjkl] to switch between splitted windows
 nnoremap <C-L> <C-W>l
@@ -159,21 +159,21 @@ map <C-F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 
 " for tipping errors
 ab q qa
-ab Q qa
+ab Q q
 ab W w
-ab Wq wqa
-ab wQ wqa
+ab Wq wq
+ab wQ wq
 ab wq wqa
 
 """"""""""""""""""""""""""""""""""Language-specific stuff""""""""""""""""""""""
 " remove trailing whitespaces when saving file
 autocmd BufWritePre * :%s/\s\+$//e
 
-" enable syntax highlighting for rust
-autocmd BufNewFile,BufRead *.rs set filetype=rust
+" enable syntax highlighting for Rust
+au BufNewFile,BufRead *.rs set filetype=rust
 
 " search zips without unzip
-autocmd BufReadCmd *.zip 	call zip#Browser(expand("<amatch>"))
+au BufReadCmd *.zip 	call zip#Browser(expand("<amatch>"))
 
 " Autosource
 autocmd! bufwritepost ~/.vimrc source ~/.vimrc
@@ -185,19 +185,16 @@ autocmd BufNewFile *.h    0r ~/.vim/skeleton/skeleton.h
 autocmd BufNewFile *.cpp  0r ~/.vim/skeleton/skeleton.cpp
 autocmd BufNewFile *.{hpp} call <SID>insert_gates()
 autocmd BufNewFile *.tex 	0r ~/.vim/skeleton/skeleton.tex
-autocmd BufNewFile *_beamer.tex 	0r ~/.vim/skeleton/skeleton_beamer.tex
-"autocmd BufNewFile *.vhd  0r ~/.vim/skeleton/skeleton.vhd
-"autocmd BufNewFile *.pl   0r ~/.vim/skeleton/skeleton.pl
 
 " Only 80 chars allowed
 highlight ColorColumn ctermbg=235 guibg=#2c2d27
-autocmd FileType c,rust let &colorcolumn=join(range(81,999),",")|set tabstop=4|set shiftwidth=4|set softtabstop=4|set cindent
+autocmd FileType c let &colorcolumn=join(range(81,999),",")|set tabstop=4|set shiftwidth=4|set softtabstop=4|set cindent
 
 " rust intendation
 autocmd FileType rust set tabstop=4|set shiftwidth=4|set softtabstop=4
 
 " python intendation
-autocmd FileType *.py set tabstop=8|set shiftwidth=4|set softtabstop=4
+autocmd FileType *.py set tabstop=8|set expandtab|set shiftwidth=4|set softtabstop=4
 
 " perl autocomplete
 autocmd FileType perl set smartindent|set iskeyword+=:|let perl_extended_vars = 1
@@ -207,13 +204,13 @@ set grepprg=grep\ -nH\ $*
 let g:tex_flavor = "latex"
 
 " spell checking for latex
-autocmd FileType tex,*.txt setlocal spell spelllang=en,de
+autocmd FileType tex setlocal spell spelllang=en,de
 
 " autocompletion
-autocmd FileType rust nmap gd <Plug>(rust-def)
-autocmd FileType rust nmap gs <Plug>(rust-def-split)
-autocmd FileType rust nmap gx <Plug>(rust-def-vertical)
-autocmd FileType rust nmap <leader>gd <Plug>(rust-doc)
+autocmd filetype rust nmap gd <plug>(rust-def)
+autocmd filetype rust nmap gs <plug>(rust-def-split)
+autocmd filetype rust nmap gx <plug>(rust-def-vertical)
+autocmd filetype rust nmap <leader>gd <plug>(rust-doc)
 
 """"""""""""""""""""""""""""""""""Functions""""""""""""""""""""""""""""""""""""
 " autocompletion with tab
@@ -245,6 +242,7 @@ endfunction
 "" settings for the syntax checkers used by syntastic
 ""let g:syntastic_<filetype>_checkers = ['<checker-name>']
 ""let g:syntastic_cpp_checkers = ['cppcheck']
+
 " With this function you can reuse the same terminal in neovim.
 " You can toggle the terminal and also send a command to the same terminal.
 
