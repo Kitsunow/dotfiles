@@ -3,18 +3,6 @@
 set rtp^=/usr/share/vim/vimfiles/
 execute pathogen#infect()
 
-"" OmniCppComplete
-"let OmniCpp_NamespaceSearch = 1
-"let OmniCpp_GlobalScopeSearch = 1
-"let OmniCpp_ShowAccess = 1
-"let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
-"let OmniCpp_MayCompleteDot = 1 " autocomplete after .
-"let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
-"let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
-"let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
-"" configure tags - add additional tags here or comment out not-used ones
-"set tags+=~/.vim/tags/cpp
-
 " vim-airline
 "set ft=tmux
 set encoding=utf-8
@@ -69,8 +57,6 @@ colorscheme molokai
 " spell checking
 "set spell spelllang=en,de
 
-" be improved, obsolete in nvim
-" set nocp
 " highlight all matching search pattern
 set hls
 
@@ -82,12 +68,6 @@ set vb
 
 " set scroll width
 set scrolloff=5
-
-" Enable undo in vim
-set undofile
-set undodir=~/.vim/undodir
-set undoreload=1000
-set undolevels=1000
 
 " general tabwidth
 set tabstop=2
@@ -131,7 +111,7 @@ tnoremap <F4> <C-\><C-n>:call MonkeyTerminalToggle()<cr>
 nnoremap <silent> <F5> :A<CR>
 
 " vim-ctrlp
-"set runtimepath^=~/.vim/bundle/ctrlp.vim
+"set runtimepath^=$HOME/.vim/bundle/ctrlp.vim
 "nnoremap <silent> <F6> :CtrlP<CR>
 nnoremap <silent> <F7> :CtrlPBuffer<CR>
 "nnoremap <silent> <F8> :CtrlPMixed<CR>
@@ -176,15 +156,15 @@ au BufNewFile,BufRead *.rs set filetype=rust
 au BufReadCmd *.zip 	call zip#Browser(expand("<amatch>"))
 
 " Autosource
-autocmd! bufwritepost ~/.vimrc source ~/.vimrc
-autocmd! bufwritepost ~/.zshrc !source ~/.zshrc
+autocmd! bufwritepost $HOME/.vimrc source $HOME/.vimrc
+autocmd! bufwritepost $HOME/.zshrc !source $HOME/.zshrc
 
 " Skeleton files for different programming languages
-autocmd BufNewFile *.c    0r ~/.vim/skeleton/skeleton.c
-autocmd BufNewFile *.h    0r ~/.vim/skeleton/skeleton.h
-autocmd BufNewFile *.cpp  0r ~/.vim/skeleton/skeleton.cpp
+autocmd BufNewFile *.c    0r $HOME/.vim/skeleton/skeleton.c
+autocmd BufNewFile *.h    0r $HOME/.vim/skeleton/skeleton.h
+autocmd BufNewFile *.cpp  0r $HOME/.vim/skeleton/skeleton.cpp
 autocmd BufNewFile *.{hpp} call <SID>insert_gates()
-autocmd BufNewFile *.tex 	0r ~/.vim/skeleton/skeleton.tex
+autocmd BufNewFile *.tex 	0r $HOME/.vim/skeleton/skeleton.tex
 
 " Only 80 chars allowed
 highlight ColorColumn ctermbg=235 guibg=#2c2d27
@@ -232,16 +212,6 @@ function! s:insert_gates()
   execute "normal! Go#endif /* " . gatename . " */"
   normal! kk
 endfunction
-
-"" syntastic settings
-""let g:syntastic_always_populate_loc_list = 1
-""let g:syntastic_auto_loc_list = 1
-""let g:syntastic_check_on_open = 1
-""let g:syntastic_check_on_wq = 0
-"
-"" settings for the syntax checkers used by syntastic
-""let g:syntastic_<filetype>_checkers = ['<checker-name>']
-""let g:syntastic_cpp_checkers = ['cppcheck']
 
 " With this function you can reuse the same terminal in neovim.
 " You can toggle the terminal and also send a command to the same terminal.
@@ -320,5 +290,4 @@ endfunction
 augroup END
 "
 """"""""""""""""""""""""""""""""""Macros"""""""""""""""""""""""""""""""""""""""
-"let @f = ']MV%k'
 let @f = 'vaBok'
