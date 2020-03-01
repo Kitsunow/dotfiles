@@ -5,9 +5,6 @@ promptinit
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 
-# Use fuzzy file finder
-[ -f ~/.fzf.sh ] && source ~/.fzf.sh
-
 # Set GPG_TTY
 export GPG_TTY=$(tty)
 
@@ -33,14 +30,14 @@ setopt completealiases
 setopt COMPLETE_IN_WORD
 
 # Additional dirs for PATH
-PATH+=':$HOME/skripte'
+PATH+=":$HOME/skripte:$HOME/.cargo/bin"
 
 # Settings for history
 # Save commands in history file without duplicates
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
-setopt HIST_IGNORE_DUPS
+setopt HISTIGNOREALLDUPS HIST_IGNORE_ALL_DUPS HIST_IGNORE_SPACE
 
 # Share history with other zsh processes
 setopt APPEND_HISTORY
@@ -54,34 +51,45 @@ setopt extended_glob
 autoload -U colors && colors
 
 # Vi-like keybindings
-bindkey -v
+#bindkey -v
+bindkey -e
+bindkey "^[[1;5D" backward-word
+bindkey "^[[1;5C" forward-word
 
 # This will set the default prompt to the walters theme
-prompt walters
+#prompt walters
 
-PROMPT="%{$fg[yellow]%}%n%{$reset_color%}@%{$fg[white]$bg[black]%}%m%{$reset_color%} %{$fg_no_bold[white]%}%1~ %{$reset_color%}%# "
-RPROMPT="[%{$fg_no_bold[yellow]%}%?%{$reset_color%}]"
+# Use Powerline9k prompt
+source /usr/share/zsh-theme-powerlevel9k/powerlevel9k.zsh-theme
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(virtualenv dir vcs)
+#POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(context public_ip time newline status root_indicator)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(context time newline status root_indicator)
+# rprompt settings
+POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+# 'dir' settings
+POWERLEVEL9K_SHORTEN_STRATEGY="truncate_to_first_and_last"
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
+# color settings for powerlevel9k
+POWERLEVEL9K_DIR_DEFAULT_BACKGROUND="black"
+POWERLEVEL9K_DIR_DEFAULT_FOREGROUND="249"
+POWERLEVEL9K_DIR_HOME_BACKGROUND="black"
+POWERLEVEL9K_DIR_HOME_FOREGROUND="249"
+POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND="black"
+POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND="249"
+POWERLEVEL9K_VCS_CLEAN_BACKGROUND="046"
+POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND="166"
+POWERLEVEL9K_VCS_MODIFIED_BACKGROUND="226"
+POWERLEVEL9K_STATUS_OK_BACKGROUND="black"
+POWERLEVEL9K_STATUS_OK_FOREGROUND="green"
+POWERLEVEL9K_STATUS_ERROR_BACKGROUND="black"
+POWERLEVEL9K_STATUS_ERROR_FOREGROUND="red"
+POWERLEVEL9K_PUBLIC_IP_BACKGROUND="black"
+POWERLEVEL9K_TIME_BACKGROUND="black"
+POWERLEVEL9K_TIME_FOREGROUND="178"
 
-COLOR_BLACK=$'\033'"[${color[black]}m"
-COLOR_RED=$'\033'"[${color[red]}m"
-COLOR_GREEN=$'\033'"[${color[green]}m"
-COLOR_YELLOW=$'\033'"[${color[yellow]}m"
-COLOR_BLUE=$'\033'"[${color[blue]}m"
-COLOR_MAGENTA=$'\033'"[${color[magenta]}m"
-COLOR_CYAN=$'\033'"[${color[cyan]}m"
-COLOR_WHITE=$'\033'"[${color[white]}m"
-
-COLOR_BG_BLACK=$'\033'"[${color[bg-black]}m"
-COLOR_BG_RED=$'\033'"[${color[bg-red]}m"
-COLOR_BG_GREEN=$'\033'"[${color[bg-green]}m"
-COLOR_BG_YELLOW=$'\033'"[${color[bg-yellow]}m"
-COLOR_BG_BLUE=$'\033'"[${color[bg-blue]}m"
-COLOR_BG_MAGENTA=$'\033'"[${color[bg-magenta]}m"
-COLOR_BG_CYAN=$'\033'"[${color[bg-cyan]}m"
-COLOR_BG_WHITE=$'\033'"[${color[bg-white]}m"
-
-COLOR_BOLD=$'\033'"[${color[bold]}m"
-COLOR_RESET=$'\033'"[${color[none]}m"
+# old prompt (less fancy, though solid)
+#PROMPT="%{$fg[yellow]%}%n%{$reset_color%}@%{$fg[white]$bg[black]%}%m%{$reset_color%} %{$fg_no_bold[white]%}%1~ %{$reset_color%}%# "
+#RPROMPT="[%{$fg_no_bold[yellow]%}%?%{$reset_color%}]"
 
 # Create a zkbd compatible hash;
 # to add other keys to this hash, see: man 5 terminfo
@@ -128,6 +136,28 @@ fi
 autoload -U   edit-command-line
 zle -N        edit-command-line
 bindkey '\ee' edit-command-line
+
+# Color definitions
+COLOR_BLACK=$'\033'"[${color[black]}m"
+COLOR_RED=$'\033'"[${color[red]}m"
+COLOR_GREEN=$'\033'"[${color[green]}m"
+COLOR_YELLOW=$'\033'"[${color[yellow]}m"
+COLOR_BLUE=$'\033'"[${color[blue]}m"
+COLOR_MAGENTA=$'\033'"[${color[magenta]}m"
+COLOR_CYAN=$'\033'"[${color[cyan]}m"
+COLOR_WHITE=$'\033'"[${color[white]}m"
+
+COLOR_BG_BLACK=$'\033'"[${color[bg-black]}m"
+COLOR_BG_RED=$'\033'"[${color[bg-red]}m"
+COLOR_BG_GREEN=$'\033'"[${color[bg-green]}m"
+COLOR_BG_YELLOW=$'\033'"[${color[bg-yellow]}m"
+COLOR_BG_BLUE=$'\033'"[${color[bg-blue]}m"
+COLOR_BG_MAGENTA=$'\033'"[${color[bg-magenta]}m"
+COLOR_BG_CYAN=$'\033'"[${color[bg-cyan]}m"
+COLOR_BG_WHITE=$'\033'"[${color[bg-white]}m"
+
+COLOR_BOLD=$'\033'"[${color[bold]}m"
+COLOR_RESET=$'\033'"[${color[none]}m"
 
 # Color for Grep-Matching #####################################################
 export GREP_COLOR="${color[bold]};${color[blue]}"
@@ -185,12 +215,10 @@ extract()
 
 # replacements
 alias cp="cp -v"
-alias g++="g++ -std=c++14"
+alias g++="g++ -std=c++17"
 alias gdb="cgdb"
 alias grep="grep --color=auto"
 alias ls='exa'
-alias matlab-cli="~/MATLAB/R2018a/bin/matlab -nodesktop"
-alias mpv="mpv --cache=500000"
 alias mv="mv -v"
 alias python="ipython"
 alias rm="rm -v"
@@ -200,6 +228,7 @@ alias vim="nvim"
 # System
 alias cupson='sudo systemctl start cups-browsed.service'
 alias unneeded='sudo pacman -Rs $(pacman -Qtdq)'
+alias pacman-preview="pacman -Slq | fzf -m --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
 
 # Option aliases
 alias dpmsoff='xset s off;xset -dpms'
@@ -216,11 +245,18 @@ alias obcrc="$EDITOR ~/.config/obmenu-generator/config.pl"
 alias obsrc="$EDITOR ~/.config/obmenu-generator/schema.pl"
 
 # useful
+alias cleantex='rm -I *.log *.aux *.toc'
 alias clock='tty-clock -c -S -C 3'
 alias ll='exa -l'
 alias la='exa -al'
-alias lh='exa -ld .*'
-alias pdf="zathura --fork"
+alias lh='exa -d .*'
+alias llh='exa -ld .*'
 alias mergepdf="gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=merged.pdf"
+alias pdf="zathura --fork"
+alias spotifyd="systemctl --user start spotifyd"
+alias venter="source $HOME/workspace/SpotifyDJ/venv/spotifydj/bin/activate"
 alias xp='obxprop | grep "WM_WINDOW_ROLE\|WM_CLASS" && echo "WM_CLASS(STRING) = \"NAME\", \"CLASS\""'
-alias fallout='WINEPREFIX=~/.wine-fnv wine .wine-fnv/drive_c/GOG\ Games/Fallout\ New\ Vegas/FalloutNVLauncher.exe'
+alias yolo='git commit -m "$(curl -s https://whatthecommit.com/index.txt)"'
+#
+# Use fuzzy file finder
+[ -f ~/.fzf.sh ] && source ~/.fzf.sh
