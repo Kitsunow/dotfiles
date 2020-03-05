@@ -1,10 +1,30 @@
 """"""""""""""""""""""""""""""""""Plugins""""""""""""""""""""""""""""""""""""""
-" use pathogen as plugin manager
+call plug#begin('~/.vim/plugged')
+" code completion
+Plug 'vim-syntastic/syntastic'
+Plug 'vim-scripts/OmniCppComplete'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neovim/pynvim'
+
+" functionality
+Plug 'vim-scripts/a.vim'
+Plug 'majutsushi/tagbar'
+Plug 'tpope/vim-surround'
+Plug 'preservim/nerdtree'
+Plug 'tpope/vim-fugitive'
+Plug 'LaTeX-Box-Team/LaTeX-Box'
+Plug 'tpope/vim-vinegar'
+Plug 'junegunn/fzf.vim'
+
+" themes'n'stuff
+Plug 'tomasr/molokai'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+call plug#end()
+""""""""""""""""""""""""""""""""""Plugin Settings""""""""""""""""""""""""""""""
 set rtp^=/usr/share/vim/vimfiles/
-execute pathogen#infect()
 
 " vim-airline
-"set ft=tmux
 set encoding=utf-8
 set laststatus=2
 let g:airline_powerline_fonts = 1
@@ -30,6 +50,7 @@ let Tlist_sci_settings = 'scilab;f:function'
 " vim-tagbar
 let g:tagbar_expand = 1
 let g:tagbar_compact = 1
+let g:tagbar_autofocus = 1
 
 " vim-latexbox
 let g:LatexBox_viewer = '/usr/bin/zathura --fork'
@@ -73,6 +94,12 @@ set vb
 " set scroll width
 set scrolloff=5
 
+"" Enable undo in vim
+"set undofile
+"set undodir=$HOME/.vim/undodir
+"set undoreload=1000
+"set undolevels=1000
+
 " general tabwidth
 set tabstop=2
 set shiftwidth=4
@@ -103,10 +130,6 @@ set completeopt=menuone,menu,longest,preview
 " NERDTree
 nnoremap <silent> <F2> :NERDTreeToggle<CR>
 
-" vim-taglist
-"nnoremap <silent> <F3> :TlistToggle<CR>
-"let Tlist_Auto_Open = 1
-"
 " vim-tagbar
 nnoremap <silent> <F3> :TagbarToggle<CR>
 
@@ -120,20 +143,11 @@ nnoremap <silent> <F5> :A<CR>
 " FZF
 nnoremap <silent> <C-O> :FZF<CR>
 
-" vim-ctrlp
-"set runtimepath^=$HOME/.vim/bundle/ctrlp.vim
-"nnoremap <silent> <F6> :CtrlP<CR>
-"nnoremap <silent> <F7> :CtrlPBuffer<CR>
-"nnoremap <silent> <F8> :CtrlPMixed<CR>
-
 " vim-session
 nnoremap <F9> :SaveSession
 nnoremap <F10> :OpenSession
 let g:session_autoload = 'no'
 let g:session_directory="~/.vim/session"
-
-" use TAB for autocomplete
-"inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 
 " use ctrl-[hjkl] to switch between splitted windows
 nnoremap <C-L> <C-W>l
@@ -204,16 +218,6 @@ autocmd filetype rust nmap gx <plug>(rust-def-vertical)
 autocmd filetype rust nmap <leader>gd <plug>(rust-doc)
 
 """"""""""""""""""""""""""""""""""Functions""""""""""""""""""""""""""""""""""""
-" autocompletion with tab
-function! InsertTabWrapper()
-  let col = col('.') - 1
-  if !col || getline('.')[col - 1] !~ '\k'
-    return "\<tab>"
-  else
-    return "\<c-p>"
-  endif
-endfunction
-
 " autodefine for c++ headers
 function! s:insert_gates()
   let gatename = substitute(toupper(expand("%:t")), "\\.", "_", "g")
@@ -226,7 +230,6 @@ endfunction
 
 " With this function you can reuse the same terminal in neovim.
 " You can toggle the terminal and also send a command to the same terminal.
-
 let s:monkey_terminal_window = -1
 let s:monkey_terminal_buffer = -1
 let s:monkey_terminal_job_id = -1
@@ -291,7 +294,6 @@ function! MonkeyTerminalExec(cmd)
   normal! G
   wincmd p
 endfunction
-
 
 " This an example on how specify command with different types of files.
     augroup go
