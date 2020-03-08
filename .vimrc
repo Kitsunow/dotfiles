@@ -3,8 +3,10 @@ call plug#begin('~/.vim/plugged')
 " code completion
 Plug 'vim-syntastic/syntastic'
 Plug 'vim-scripts/OmniCppComplete'
+Plug 'justmao945/vim-clang'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neovim/pynvim'
+Plug 'Matt-Deacalion/vim-systemd-syntax'
 
 " functionality
 Plug 'vim-scripts/a.vim'
@@ -15,6 +17,9 @@ Plug 'tpope/vim-fugitive'
 Plug 'LaTeX-Box-Team/LaTeX-Box'
 Plug 'tpope/vim-vinegar'
 Plug 'junegunn/fzf.vim'
+Plug 'xolox/vim-session'
+Plug 'xolox/vim-misc'
+Plug 'jiangmiao/auto-pairs'
 
 " themes'n'stuff
 Plug 'tomasr/molokai'
@@ -93,12 +98,6 @@ set vb
 
 " set scroll width
 set scrolloff=5
-
-"" Enable undo in vim
-"set undofile
-"set undodir=$HOME/.vim/undodir
-"set undoreload=1000
-"set undolevels=1000
 
 " general tabwidth
 set tabstop=2
@@ -230,6 +229,7 @@ endfunction
 
 " With this function you can reuse the same terminal in neovim.
 " You can toggle the terminal and also send a command to the same terminal.
+
 let s:monkey_terminal_window = -1
 let s:monkey_terminal_buffer = -1
 let s:monkey_terminal_job_id = -1
@@ -294,6 +294,7 @@ function! MonkeyTerminalExec(cmd)
   normal! G
   wincmd p
 endfunction
+
 
 " This an example on how specify command with different types of files.
     augroup go
