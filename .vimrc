@@ -173,9 +173,6 @@ ab wq wqa
 " remove trailing whitespaces when saving file
 autocmd BufWritePre * :%s/\s\+$//e
 
-" enable syntax highlighting for Rust
-au BufNewFile,BufRead *.rs set filetype=rust
-
 " search zips without unzip
 au BufReadCmd *.zip 	call zip#Browser(expand("<amatch>"))
 
@@ -183,50 +180,36 @@ au BufReadCmd *.zip 	call zip#Browser(expand("<amatch>"))
 autocmd! bufwritepost $HOME/.vimrc source $HOME/.vimrc
 autocmd! bufwritepost $HOME/.zshrc !source $HOME/.zshrc
 
-" Skeleton files for different programming languages
-autocmd BufNewFile *.c    0r $HOME/.vim/skeleton/skeleton.c
-autocmd BufNewFile *.h    0r $HOME/.vim/skeleton/skeleton.h
-autocmd BufNewFile *.cpp  0r $HOME/.vim/skeleton/skeleton.cpp
-autocmd BufNewFile *.{hpp} call <SID>insert_gates()
-autocmd BufNewFile *.tex 	0r $HOME/.vim/skeleton/skeleton.tex
-
 " Only 80 chars allowed
 highlight ColorColumn ctermbg=235 guibg=#2c2d27
 autocmd FileType c let &colorcolumn=join(range(81,999),",")|set tabstop=4|set shiftwidth=4|set softtabstop=4|set cindent
 
-" rust intendation
-autocmd FileType rust set tabstop=4|set shiftwidth=4|set softtabstop=4
+" Skeleton files for different programming languages
+autocmd BufNewFile *.tex 	0r $HOME/.vim/skeleton/skeleton.tex
 
-" python intendation
-autocmd FileType *.py set tabstop=8|set expandtab|set shiftwidth=4|set softtabstop=4
-
-" perl autocomplete
-autocmd FileType perl set smartindent|set iskeyword+=:|let perl_extended_vars = 1
+" spell checking for latex
+autocmd FileType tex setlocal spell spelllang=en,de
 
 " latex support on
 set grepprg=grep\ -nH\ $*
 let g:tex_flavor = "latex"
 
-" spell checking for latex
-autocmd FileType tex setlocal spell spelllang=en,de
+" python intendation
+autocmd FileType *.py set tabstop=8|set expandtab|set shiftwidth=4|set softtabstop=4
 
-" autocompletion
+" rust intendation
+autocmd FileType rust set tabstop=4|set shiftwidth=4|set softtabstop=4
+
+" enable syntax highlighting for rust
+au BufNewFile,BufRead *.rs set filetype=rust
+
+" autocompletion for rust
 autocmd filetype rust nmap gd <plug>(rust-def)
 autocmd filetype rust nmap gs <plug>(rust-def-split)
 autocmd filetype rust nmap gx <plug>(rust-def-vertical)
 autocmd filetype rust nmap <leader>gd <plug>(rust-doc)
 
 """"""""""""""""""""""""""""""""""Functions""""""""""""""""""""""""""""""""""""
-" autodefine for c++ headers
-function! s:insert_gates()
-  let gatename = substitute(toupper(expand("%:t")), "\\.", "_", "g")
-  execute "normal! i#ifndef " . gatename
-  execute "normal! o#define " . gatename . " "
-  execute "normal! i\n "
-  execute "normal! Go#endif /* " . gatename . " */"
-  normal! kk
-endfunction
-
 " With this function you can reuse the same terminal in neovim.
 " You can toggle the terminal and also send a command to the same terminal.
 

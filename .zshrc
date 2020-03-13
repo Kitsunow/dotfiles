@@ -5,17 +5,15 @@ promptinit
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 
-# Set GPG_TTY
-export GPG_TTY=$(tty)
-
 # Set environment variables
-export BROWSER=firefox
-export EDITOR=nvim
-export VISUAL=nvim
-export TERM=terminator
+BROWSER=firefox
+EDITOR=nvim
+VISUAL=nvim
+TERM=terminator
+GREP_OPTIONS=--color=always
 
 # Set the editor used for sudoedit / sudo -e
-export SUDO_EDITOR=$EDITOR
+SUDO_EDITOR=$EDITOR
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Disable BEEEEP
