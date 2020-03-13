@@ -19,9 +19,6 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 # Disable BEEEEP
 setopt NO_BEEP
 
-# Type dir instead of cd dir
-setopt AUTO_CD
-
 # Use TAB to select a completion option from the completion menu
 zstyle ':completion:*' menu select
 setopt completealiases
@@ -53,9 +50,6 @@ autoload -U colors && colors
 bindkey -e
 bindkey "^[[1;5D" backward-word
 bindkey "^[[1;5C" forward-word
-
-# This will set the default prompt to the walters theme
-#prompt walters
 
 # Use Powerline9k prompt
 source /usr/share/zsh-theme-powerlevel9k/powerlevel9k.zsh-theme
@@ -183,7 +177,6 @@ export LESS_TERMCAP_ue=$COLOR_RESET
 # We don't need a history in less #############################################
 export LESSHISTFILE=-
 
-
 # Invoke ls after cd
 function chpwd()
 {
@@ -254,7 +247,7 @@ alias pdf="zathura --fork"
 alias spotifyd="systemctl --user start spotifyd"
 alias venter="source $HOME/workspace/SpotifyDJ/venv/spotifydj/bin/activate"
 alias xp='obxprop | grep "WM_WINDOW_ROLE\|WM_CLASS" && echo "WM_CLASS(STRING) = \"NAME\", \"CLASS\""'
-alias yolo='git commit -m "$(curl -s https://whatthecommit.com/index.txt)"'
-#
+alias yolo='git commit -m "$(curl -s http://whatthecommit.com/index.txt)"'
+
 # Use fuzzy file finder
 [ -f ~/.fzf.sh ] && source ~/.fzf.sh
