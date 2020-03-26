@@ -1,3 +1,14 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# Use Powerlevel10k prompt
+[ -f /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme ] && source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+
+
 # Init Prompt and completion
 autoload -Uz compinit promptinit up-line-or-beginning-search down-line-or-beginning-search
 compinit
@@ -28,7 +39,6 @@ setopt COMPLETE_IN_WORD
 PATH+=":$HOME/skripte:$HOME/.cargo/bin"
 
 # Settings for history
-# Save commands in history file without duplicates
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
@@ -45,43 +55,10 @@ setopt extended_glob
 # Enable Colors
 autoload -U colors && colors
 
-# Vi-like keybindings
-#bindkey -v
+# Emacs-like keybindings
 bindkey -e
 bindkey "^[[1;5D" backward-word
 bindkey "^[[1;5C" forward-word
-
-# Use Powerline9k prompt
-source /usr/share/zsh-theme-powerlevel9k/powerlevel9k.zsh-theme
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(virtualenv dir vcs)
-#POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(context public_ip time newline status root_indicator)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(context time newline status root_indicator)
-# rprompt settings
-POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-# 'dir' settings
-POWERLEVEL9K_SHORTEN_STRATEGY="truncate_to_first_and_last"
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
-# color settings for powerlevel9k
-POWERLEVEL9K_DIR_DEFAULT_BACKGROUND="black"
-POWERLEVEL9K_DIR_DEFAULT_FOREGROUND="249"
-POWERLEVEL9K_DIR_HOME_BACKGROUND="black"
-POWERLEVEL9K_DIR_HOME_FOREGROUND="249"
-POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND="black"
-POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND="249"
-POWERLEVEL9K_VCS_CLEAN_BACKGROUND="046"
-POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND="166"
-POWERLEVEL9K_VCS_MODIFIED_BACKGROUND="226"
-POWERLEVEL9K_STATUS_OK_BACKGROUND="black"
-POWERLEVEL9K_STATUS_OK_FOREGROUND="green"
-POWERLEVEL9K_STATUS_ERROR_BACKGROUND="black"
-POWERLEVEL9K_STATUS_ERROR_FOREGROUND="red"
-POWERLEVEL9K_PUBLIC_IP_BACKGROUND="black"
-POWERLEVEL9K_TIME_BACKGROUND="black"
-POWERLEVEL9K_TIME_FOREGROUND="178"
-
-# old prompt (less fancy, though solid)
-#PROMPT="%{$fg[yellow]%}%n%{$reset_color%}@%{$fg[white]$bg[black]%}%m%{$reset_color%} %{$fg_no_bold[white]%}%1~ %{$reset_color%}%# "
-#RPROMPT="[%{$fg_no_bold[yellow]%}%?%{$reset_color%}]"
 
 # Create a zkbd compatible hash;
 # to add other keys to this hash, see: man 5 terminfo
@@ -103,8 +80,6 @@ key[PageDown]=${terminfo[knp]}
 [[ -n "${key[End]}"     ]]  && bindkey  "${key[End]}"     end-of-line
 [[ -n "${key[Insert]}"  ]]  && bindkey  "${key[Insert]}"  overwrite-mode
 [[ -n "${key[Delete]}"  ]]  && bindkey  "${key[Delete]}"  delete-char
-#[[ -n "${key[Up]}"      ]]  && bindkey  "${key[Up]}"      up-line-or-history
-#[[ -n "${key[Down]}"    ]]  && bindkey  "${key[Down]}"    down-line-or-history
 [[ -n "${key[Up]}"      ]]  && bindkey  "${key[Up]}"      up-line-or-beginning-search
 [[ -n "${key[Down]}"    ]]  && bindkey  "${key[Down]}"    down-line-or-beginning-search
 [[ -n "${key[Left]}"    ]]  && bindkey  "${key[Left]}"    backward-char
@@ -155,7 +130,6 @@ COLOR_RESET=$'\033'"[${color[none]}m"
 export GREP_COLOR="${color[bold]};${color[blue]}"
 
 # Color for Manpages #########################################################
-#export LESS_TERMCAP_md=$COLOR_YELLOW$COLOR_BOLD
 export LESS_TERMCAP_md=$COLOR_YELLOW
 export LESS_TERMCAP_me=$COLOR_RESET
 
@@ -251,3 +225,6 @@ alias yolo='git commit -m "$(curl -s http://whatthecommit.com/index.txt)"'
 
 # Use fuzzy file finder
 [ -f ~/.fzf.sh ] && source ~/.fzf.sh
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
