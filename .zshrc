@@ -8,23 +8,23 @@ fi
 # Use Powerlevel10k prompt
 [ -f /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme ] && source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
-
 # Init Prompt and completion
 autoload -Uz compinit promptinit up-line-or-beginning-search down-line-or-beginning-search
 compinit
+kitty + complete setup zsh | source /dev/stdin
 promptinit
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 
 # Set environment variables
-BROWSER=firefox
-EDITOR=nvim
-VISUAL=nvim
-TERM=terminator
+export BROWSER=firefox
+export EDITOR=nvim
+export VISUAL=nvim
+export TERM=kitty
 GREP_OPTIONS=--color=always
 
 # Set the editor used for sudoedit / sudo -e
-SUDO_EDITOR=$EDITOR
+export SUDO_EDITOR=$EDITOR
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Disable BEEEEP
@@ -36,7 +36,7 @@ setopt completealiases
 setopt COMPLETE_IN_WORD
 
 # Additional dirs for PATH
-PATH+=":$HOME/skripte:$HOME/.cargo/bin"
+PATH+=":$HOME/skripte:$HOME/.cargo/bin:/opt/gcc-arm-none-eabi-7-2018-q2-update/bin"
 
 # Settings for history
 HISTFILE=~/.zsh_history
@@ -211,7 +211,6 @@ alias obsrc="$EDITOR ~/.config/obmenu-generator/schema.pl"
 
 # useful
 alias cleantex='rm -I *.log *.aux *.toc'
-alias clock='tty-clock -c -S -C 3'
 alias ll='exa -l'
 alias la='exa -al'
 alias lh='exa -d .*'
