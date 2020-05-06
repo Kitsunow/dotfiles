@@ -210,7 +210,7 @@ alias obcrc="$EDITOR ~/.config/obmenu-generator/config.pl"
 alias obsrc="$EDITOR ~/.config/obmenu-generator/schema.pl"
 
 # useful
-alias cleantex='rm -I *.log *.aux *.toc'
+alias cleantex='rm -I *.log *.aux *.out'
 alias ll='exa -l'
 alias la='exa -al'
 alias lh='exa -d .*'
