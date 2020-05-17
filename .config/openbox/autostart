@@ -1,0 +1,63 @@
+if [ -d /etc/X11/xinit/xinitrc.d ]; then
+    for f in /etc/X11/xinit/xinitrc.d/*; do
+        [ -x "$f" ] && . "$f"
+    done
+    unset f
+fi
+
+# check for existence
+has() {
+    which "$1"
+}
+
+# set mouse acceleration and pointer icon
+if has xset; then
+    # disable bell
+    xset b off
+fi
+
+xsetroot -cursor_name left_ptr
+
+# use fcitx as input manager
+if has fcitx; then
+    export GTK_IM_MODULE=fcitx
+    export QT_IM_MODULE=fcitx
+    export XMODIFIERS=@im=fcitx
+    fcitx &
+fi
+
+# activate composite manager
+if has xcompmgr; then
+    xcompmgr -c &
+fi
+
+# set wallpaper
+if has feh; then
+    feh --bg-scale --randomize ~/.wallpaper/* &
+fi
+
+# start terminal as backgound service
+if has kitty; then
+    kitty --listen-on unix:/tmp/mykitty &
+fi
+
+# start panel
+if has tint2; then
+    tint2 &
+fi
+
+if has syncthingtray; then
+    syncthingtray &
+fi
+
+if has netctl-tray; then
+    netctl-tray &
+fi
+
+if has pasystray; then
+    pasystray &
+fi
+
+if has keepassxc; then
+    keepassxc &
+fi
