@@ -204,14 +204,13 @@ alias dpmsoff='xset s off;xset -dpms'
 alias dpmson='xset s on;xset +dpms'
 
 # config files
+alias arc="$EDITOR ~/.config/openbox/autostart"
 alias orc="$EDITOR ~/.config/openbox/rc.xml && openbox --reconfigure"
 alias omrc="$EDITOR ~/.config/openbox/menu.xml && openbox --reconfigure"
-alias vrc="$EDITOR ~/.vimrc"
-alias arc="$EDITOR ~/.config/openbox/autostart"
-alias xrc="$EDITOR ~/.xinitrc"
-alias zrc="$EDITOR ~/.zshrc && source ~/.zshrc"
 alias obcrc="$EDITOR ~/.config/obmenu-generator/config.pl"
 alias obsrc="$EDITOR ~/.config/obmenu-generator/schema.pl"
+alias vrc="$EDITOR ~/.vimrc"
+alias zrc="$EDITOR ~/.zshrc && source ~/.zshrc"
 
 # useful
 alias cleantex='rm -I *.log *.aux *.out'
@@ -221,8 +220,6 @@ alias lh='exa -d .*'
 alias llh='exa -ld .*'
 alias mergepdf="gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=merged.pdf"
 alias pdf="zathura --fork"
-alias spotifyd="systemctl --user start spotifyd"
-alias venter="source $HOME/workspace/SpotifyDJ/venv/spotifydj/bin/activate"
 alias xp='obxprop | grep "WM_WINDOW_ROLE\|WM_CLASS" && echo "WM_CLASS(STRING) = \"NAME\", \"CLASS\""'
 alias yolo='git commit -m "$(curl -s http://whatthecommit.com/index.txt)"'
 
