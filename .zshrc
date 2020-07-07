@@ -40,7 +40,7 @@ setopt completealiases
 setopt COMPLETE_IN_WORD
 
 # Additional dirs for PATH
-PATH+=":$HOME/skripte:$HOME/.cargo/bin:/opt/gcc-arm-none-eabi-7-2018-q2-update/bin"
+PATH+=":$HOME/skripte:$HOME/.cargo/bin:/opt/gcc-arm-none-eabi-9-2020-q2-update/bin"
 
 # Settings for history
 HISTFILE=~/.zsh_history
@@ -198,6 +198,7 @@ alias vim="nvim"
 alias cupson='sudo systemctl start cups-browsed.service'
 alias unneeded='sudo pacman -Rs $(pacman -Qtdq)'
 alias pacman-preview="pacman -Slq | fzf -m --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
+alias update="sudo pacman -Syu && pikaur -Syu && pikaur -Scc"
 
 # Option aliases
 alias dpmsoff='xset s off;xset -dpms'
