@@ -1,25 +1,19 @@
 """"""""""""""""""""""""""""""""""Plugins""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
-" code completion
+" code completion, linting, highlighting
 Plug 'vim-syntastic/syntastic'
-Plug 'vim-scripts/OmniCppComplete'
-Plug 'justmao945/vim-clang'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neovim/pynvim'
 Plug 'Matt-Deacalion/vim-systemd-syntax'
 
 " functionality
-Plug 'vim-scripts/a.vim'
-Plug 'majutsushi/tagbar'
-Plug 'tpope/vim-surround'
 Plug 'preservim/nerdtree'
-Plug 'tpope/vim-fugitive'
-Plug 'LaTeX-Box-Team/LaTeX-Box'
-Plug 'tpope/vim-vinegar'
+Plug 'majutsushi/tagbar'
 Plug 'junegunn/fzf.vim'
+Plug 'LaTeX-Box-Team/LaTeX-Box'
 Plug 'xolox/vim-session'
-Plug 'xolox/vim-misc'
 Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-vinegar'
 
 " themes'n'stuff
 Plug 'tomasr/molokai'
@@ -136,8 +130,8 @@ nnoremap <silent> <F3> :TagbarToggle<CR>
 nnoremap <F4> :call MonkeyTerminalToggle()<cr>
 tnoremap <F4> <C-\><C-n>:call MonkeyTerminalToggle()<cr>
 
-" vim-a
-nnoremap <silent> <F5> :A<CR>
+" Switch between source and header in c/c++
+nnoremap <silent> <F5> :CocCommand clangd.switchSourceHeader<CR>
 
 " FZF
 nnoremap <silent> <C-O> :FZF<CR>
