@@ -14,6 +14,7 @@ Plug 'LaTeX-Box-Team/LaTeX-Box'
 Plug 'xolox/vim-session'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-vinegar'
+Plug 'xolox/vim-misc'
 
 " themes'n'stuff
 Plug 'tomasr/molokai'
