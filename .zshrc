@@ -40,7 +40,7 @@ setopt completealiases
 setopt COMPLETE_IN_WORD
 
 # Additional dirs for PATH
-PATH+=":$HOME/skripte:$HOME/.cargo/bin:/opt/gcc-arm-none-eabi-9-2020-q2-update/bin"
+PATH+=":$HOME/bin:$HOME/.cargo/bin"
 
 # Settings for history
 HISTFILE=~/.zsh_history
