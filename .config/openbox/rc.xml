@@ -346,9 +346,9 @@
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
-          <name>Terminator</name>
+          <name>Terminal</name>
         </startupnotify>
-        <command>terminator -l default</command>
+        <command>kitty --listen-on unix:/tmp/mykitty</command>
       </action>
     </keybind>
     <keybind key="W-a">
@@ -372,6 +372,17 @@
         </action>
       </keybind>
       -->
+    </keybind>
+    <keybind key="W-s">
+      <keybind key="s">
+        <action name="Execute">
+           <startupnotify>
+              <enabled>true</enabled>
+              <name>Screenshot</name>
+           </startupnotify>
+           <command>scrot -s</command>
+        </action>
+      </keybind>
     </keybind>
     <keybind key="W-l">
       <action name="Execute">

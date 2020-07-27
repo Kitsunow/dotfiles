@@ -27,9 +27,9 @@ if has fcitx; then
 fi
 
 # activate composite manager
-#if has xcompmgr; then
-#    xcompmgr -c &
-#fi
+if has xcompmgr; then
+    xcompmgr -c &
+fi
 
 # set wallpaper
 if has feh; then
