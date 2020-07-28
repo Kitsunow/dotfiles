@@ -18,6 +18,7 @@ Plug 'xolox/vim-misc'
 
 " themes'n'stuff
 Plug 'tomasr/molokai'
+Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 call plug#end()
@@ -28,7 +29,7 @@ set rtp^=/usr/share/vim/vimfiles/
 set encoding=utf-8
 set laststatus=2
 let g:airline_powerline_fonts = 1
-let g:airline_theme='distinguished'
+let g:airline_theme='molokai'
 
 " vim-racer
 set hidden
@@ -54,6 +55,13 @@ let g:tagbar_autofocus = 1
 
 " vim-latexbox
 let g:LatexBox_viewer = '/usr/bin/zathura --fork'
+
+" vim-cpp-enhanced-highlight
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+let g:cpp_class_decl_highlight = 1
+let g:cpp_posix_standard = 1
+let g:cpp_concepts_highlight = 1
 
 " nim-vim
 fun! JumpToDef()
