@@ -46,9 +46,9 @@ if has tint2; then
     tint2 &
 fi
 
-#if has syncthingtray; then
-#    syncthingtray &
-#fi
+if has syncthingtray; then
+    syncthingtray &
+fi
 
 if has pasystray; then
     pasystray &
