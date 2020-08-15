@@ -18,13 +18,13 @@ fi
 
 xsetroot -cursor_name left_ptr
 
-# use fcitx as input manager
-if has fcitx; then
-    export GTK_IM_MODULE=fcitx
-    export QT_IM_MODULE=fcitx
-    export XMODIFIERS=@im=fcitx
-    fcitx &
-fi
+## use fcitx as input manager
+#if has fcitx; then
+#    export GTK_IM_MODULE=fcitx
+#    export QT_IM_MODULE=fcitx
+#    export XMODIFIERS=@im=fcitx
+#    fcitx &
+#fi
 
 # activate composite manager
 if has xcompmgr; then
@@ -46,13 +46,9 @@ if has tint2; then
     tint2 &
 fi
 
-if has syncthingtray; then
-    syncthingtray &
-fi
-
-if has netctl-tray; then
-    netctl-tray &
-fi
+#if has syncthingtray; then
+#    syncthingtray &
+#fi
 
 if has pasystray; then
     pasystray &
