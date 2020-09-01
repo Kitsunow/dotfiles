@@ -17,10 +17,10 @@ Plug 'preservim/nerdtree'
 Plug 'majutsushi/tagbar'
 Plug 'junegunn/fzf.vim'
 Plug 'LaTeX-Box-Team/LaTeX-Box'
-Plug 'xolox/vim-session'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-vinegar'
 Plug 'xolox/vim-misc'
+Plug 'mhinz/vim-startify'
 
 " themes'n'stuff
 Plug 'tomasr/molokai'
@@ -152,8 +152,8 @@ nnoremap <silent> <F5> :CocCommand clangd.switchSourceHeader<CR>
 nnoremap <silent> <C-O> :FZF<CR>
 
 " vim-session
-nnoremap <F9> :SaveSession
-nnoremap <F10> :OpenSession
+nnoremap <F9> :SSave
+nnoremap <F10> :SLoad
 let g:session_autoload = 'no'
 let g:session_directory="~/.vim/session"
 
@@ -424,3 +424,11 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+"
+"""""""""""""""""""""""""""""""Startify""""""""""""""""""""""""""""""""""""""
+" Bookmarks
+let g:startify_bookmarks = [
+            \ { 'k': '~/.config/kitty/kitty.conf' },
+            \ { 'v': '~/.vimrc' },
+            \ { 'z': '~/.zshrc' },
+            \ ]
