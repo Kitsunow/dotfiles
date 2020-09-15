@@ -38,11 +38,6 @@ set laststatus=2
 let g:airline_powerline_fonts = 1
 let g:airline_theme='molokai'
 
-" vim-racer
-set hidden
-let g:racer_cmd = "/usr/bin/racer"
-let g:racer_experimental_completer = 1
-
 " vim-clang
 let g:clang_library_path = "/usr/lib64/llvm"
 let g:clang_c_options = '--std=gnu11'
