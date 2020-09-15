@@ -17,8 +17,6 @@ nnoremap <silent> <leader><C-o> :FZF<CR>
 " vim-session
 nnoremap <F9> :SSave
 nnoremap <F10> :SLoad
-let g:session_autoload = 'no'
-let g:session_directory="~/.vim/session"
 
 " use ctrl-[hjkl] to switch between splitted windows
 nnoremap <C-L> <C-W>l
