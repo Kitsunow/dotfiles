@@ -5,6 +5,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# Environment variables for ROS
 if [[ -e "/opt/ros/melodic/setup.zsh" ]]; then
     source "/opt/ros/melodic/setup.zsh"
 fi
@@ -20,32 +21,15 @@ promptinit
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 
-# Set environment variables
-export BROWSER=firefox
-export EDITOR=nvim
-export VISUAL=nvim
-export TERM=kitty
-GREP_OPTIONS=--color=always
-
-# Set the editor used for sudoedit / sudo -e
-export SUDO_EDITOR=$EDITOR
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
 # Disable BEEEEP
 setopt NO_BEEP
 
 # Use TAB to select a completion option from the completion menu
 zstyle ':completion:*' menu select
-setopt completealiases
+setopt COMPLETEALIASES
 setopt COMPLETE_IN_WORD
 
-# Additional dirs for PATH
-PATH+=":$HOME/bin:$HOME/.cargo/bin"
-
-# Settings for history
-HISTFILE=~/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
+# Ignore duplicate commands in history
 setopt HISTIGNOREALLDUPS HIST_IGNORE_ALL_DUPS HIST_IGNORE_SPACE
 
 # Share history with other zsh processes
@@ -54,7 +38,7 @@ setopt INC_APPEND_HISTORY
 setopt SHARE_HISTORY
 
 # Allow extended globbing (like rm -- ^*.zip)
-setopt extended_glob
+setopt EXTENDED_GLOB
 
 # Enable Colors
 autoload -U colors && colors
@@ -93,74 +77,26 @@ key[PageDown]=${terminfo[knp]}
 
 # Finally, make sure the terminal is in application mode, when zle is
 # active. Only then are the values from $terminfo valid.
-if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
-  function zle-line-init () {
-  printf '%s' ${terminfo[smkx]}
-}
-function zle-line-finish () {
-printf '%s' ${terminfo[rmkx]}
-}
-zle -N zle-line-init
-zle -N zle-line-finish
+if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
+	autoload -Uz add-zle-hook-widget
+	function zle_application_mode_start { echoti smkx }
+	function zle_application_mode_stop { echoti rmkx }
+	add-zle-hook-widget -Uz zle-line-init zle_application_mode_start
+	add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
 fi
 
+# Edit commands in external editor
 autoload -U   edit-command-line
 zle -N        edit-command-line
 bindkey '\ee' edit-command-line
 
-# Color definitions
-COLOR_BLACK=$'\033'"[${color[black]}m"
-COLOR_RED=$'\033'"[${color[red]}m"
-COLOR_GREEN=$'\033'"[${color[green]}m"
-COLOR_YELLOW=$'\033'"[${color[yellow]}m"
-COLOR_BLUE=$'\033'"[${color[blue]}m"
-COLOR_MAGENTA=$'\033'"[${color[magenta]}m"
-COLOR_CYAN=$'\033'"[${color[cyan]}m"
-COLOR_WHITE=$'\033'"[${color[white]}m"
-
-COLOR_BG_BLACK=$'\033'"[${color[bg-black]}m"
-COLOR_BG_RED=$'\033'"[${color[bg-red]}m"
-COLOR_BG_GREEN=$'\033'"[${color[bg-green]}m"
-COLOR_BG_YELLOW=$'\033'"[${color[bg-yellow]}m"
-COLOR_BG_BLUE=$'\033'"[${color[bg-blue]}m"
-COLOR_BG_MAGENTA=$'\033'"[${color[bg-magenta]}m"
-COLOR_BG_CYAN=$'\033'"[${color[bg-cyan]}m"
-COLOR_BG_WHITE=$'\033'"[${color[bg-white]}m"
-
-COLOR_BOLD=$'\033'"[${color[bold]}m"
-COLOR_RESET=$'\033'"[${color[none]}m"
-
-# Color for Grep-Matching #####################################################
-export GREP_COLOR="${color[bold]};${color[blue]}"
-
-# Color for Manpages #########################################################
-export LESS_TERMCAP_md=$COLOR_YELLOW
-export LESS_TERMCAP_me=$COLOR_RESET
-
-export LESS_TERMCAP_so=$COLOR_WHITE$COLOR_BG_BLUE
-export LESS_TERMCAP_se=$COLOR_RESET
-
-export LESS_TERMCAP_us=$COLOR_RED
-export LESS_TERMCAP_ue=$COLOR_RESET
-# see man termcap:
-#	[...]
-#       md   Start bold mode
-#       me   End all mode like so, us, mb, md and mr
-#       so   Start standout mode
-#       se   End standout mode
-#       us   Start underlining
-#       ue   End underlining
-#	[...]
-
-# We don't need a history in less #############################################
-export LESSHISTFILE=-
-
 # Invoke ls after cd
 function chpwd()
 {
-  exa
+    $LS
 }
 
+############# Function goes here #################
 # Function to unpack content with different formats
 extract()
 {
@@ -182,12 +118,13 @@ extract()
   fi
 }
 
+############# Aliases goes here #################
 # replacements
 alias cp="cp -v"
 alias g++="g++ -std=c++17"
 alias gdb="cgdb"
 alias grep="grep --color=auto"
-alias ls='exa'
+alias ls="$LS"
 alias mv="mv -v"
 alias python="ipython"
 alias rm="rm -v"
@@ -215,10 +152,10 @@ alias zrc="$EDITOR ~/.zshrc && source ~/.zshrc"
 
 # useful
 alias cleantex='rm -I *.log *.aux *.out'
-alias ll='exa -l'
-alias la='exa -al'
-alias lh='exa -d .*'
-alias llh='exa -ld .*'
+alias ll="$LS -l"
+alias la="$LS -al"
+alias lh="$LS -d .*"
+alias llh="$LS -ld .*"
 alias mergepdf="gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=merged.pdf"
 alias pdf="zathura --fork"
 alias xp='obxprop | grep "WM_WINDOW_ROLE\|WM_CLASS" && echo "WM_CLASS(STRING) = \"NAME\", \"CLASS\""'
@@ -229,3 +166,6 @@ alias yolo='git commit -m "$(curl -s http://whatthecommit.com/index.txt)"'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Use zsh syntax highlighting
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
