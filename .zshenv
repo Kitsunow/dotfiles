@@ -7,7 +7,7 @@ export PATH
 export BROWSER=firefox
 export EDITOR=nvim
 export VISUAL=nvim
-export GREP_OPTIONS=--color=always
+export COLOR=--color=always
 
 # Set the editor used for sudoedit / sudo -e
 export SUDO_EDITOR=$EDITOR
@@ -21,7 +21,7 @@ export SAVEHIST=10000
 if (( $+commands[exa] )); then
     export LS=/usr/bin/exa
 else
-    export LS="/usr/bin/ls $GREP_OPTIONS"
+    export LS=/usr/bin/ls
 fi
 
 # We don't need a history in less

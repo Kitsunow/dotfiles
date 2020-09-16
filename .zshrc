@@ -93,7 +93,7 @@ bindkey '\ee' edit-command-line
 # Invoke ls after cd
 function chpwd()
 {
-    $LS
+    $LS $COLOR
 }
 
 ############# Function goes here #################
@@ -124,7 +124,7 @@ alias cp="cp -v"
 alias g++="g++ -std=c++17"
 alias gdb="cgdb"
 alias grep="grep --color=auto"
-alias ls="$LS"
+alias ls="$LS $COLOR"
 alias mv="mv -v"
 alias python="ipython"
 alias rm="rm -v"
@@ -152,10 +152,10 @@ alias zrc="$EDITOR ~/.zshrc && source ~/.zshrc"
 
 # useful
 alias cleantex='rm -I *.log *.aux *.out'
-alias ll="$LS -l"
-alias la="$LS -al"
-alias lh="$LS -d .*"
-alias llh="$LS -ld .*"
+alias ll="ls -l"
+alias la="ls -al"
+alias lh="ls -d .*"
+alias llh="ls -ld .*"
 alias mergepdf="gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=merged.pdf"
 alias pdf="zathura --fork"
 alias xp='obxprop | grep "WM_WINDOW_ROLE\|WM_CLASS" && echo "WM_CLASS(STRING) = \"NAME\", \"CLASS\""'
