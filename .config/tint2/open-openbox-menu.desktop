@@ -1,0 +1,7 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Name=Openbox menu
+Exec=xdotool key Super_L+m
+Categories=System;
+Icon=~/.config/tint2/archlinux.svg
