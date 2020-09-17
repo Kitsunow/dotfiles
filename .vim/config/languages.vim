@@ -1,6 +1,6 @@
 " Only 80 chars allowed
 highlight ColorColumn ctermbg=235 guibg=#2c2d27
-autocmd FileType c,cpp,python,rust let &colorcolumn=join(range(81,999),",")|set tabstop=4|set shiftwidth=4|set softtabstop=4|set cindent
+autocmd FileType c,cpp,python,rust let &colorcolumn=join(range(101,999),",")|set tabstop=4|set shiftwidth=4|set softtabstop=4|set cindent
 
 " Skeleton files for different programming languages
 autocmd BufNewFile *.tex 	0r $HOME/.vim/skeleton/skeleton.tex
