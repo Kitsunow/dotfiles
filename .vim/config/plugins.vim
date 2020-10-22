@@ -21,6 +21,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-vinegar'
 Plug 'xolox/vim-misc'
 Plug 'mhinz/vim-startify'
+"Plug 'CoatiSoftware/vim-sourcetrail'
 
 " themes'n'stuff
 Plug 'tomasr/molokai'
