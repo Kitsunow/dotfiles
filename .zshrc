@@ -151,7 +151,6 @@ alias vrc="$EDITOR ~/.vimrc"
 alias zrc="$EDITOR ~/.zshrc && source ~/.zshrc"
 
 # useful
-alias cleantex='rm -I *.log *.aux *.out'
 alias ll="ls -l"
 alias la="ls -al"
 alias lh="ls -d .*"
