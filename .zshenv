@@ -36,7 +36,7 @@ export LESSHISTFILE=-
 #       ue   End underlining
 export LESS_TERMCAP_md=$'\033'"[${color[yellow]}m"
 export LESS_TERMCAP_me=$'\033'"[${color[none]}m"
-export LESS_TERMCAP_so=$'\033'"[${color[white]}m"$'\033'"[$color[bg-blue]]"
+export LESS_TERMCAP_so=$'\033'"[${color[bg-red]}m"
 export LESS_TERMCAP_se=$'\033'"[${color[none]}m"
 export LESS_TERMCAP_us=$'\033'"[${color[red]}m"
 export LESS_TERMCAP_ue=$'\033'"[${color[none]}m"

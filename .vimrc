@@ -39,18 +39,21 @@ if has('mouse')
 endif
 
 " automatically open and close the popup menu / preview window
-au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+autocmd CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,menu,longest,preview
 
 " remove trailing whitespace when saving file
 autocmd BufWritePre * :%s/\s\+$//e
 
-" Autosource on save
-autocmd! bufwritepost $HOME/.vimrc source $HOME/.vimrc
-autocmd! bufwritepost $HOME/.zshrc !source $HOME/.zshrc
+" Autosource certain configs on write
+autocmd BufWritePost $HOME/.vimrc source $HOME/.vimrc
+autocmd BufWritePost $HOME/.zshrc !source $HOME/.zshrc
+autocmd BufWritePost $HOME/.zshenv !source $HOME/.zshenv
+autocmd BufWritePost *openbox/rc.xml !openbox --reconfigure
+autocmd BufWritePost *openbox/menu.xml !openbox --reconfigure
 
 " search zips without unzip
-au BufReadCmd *.zip 	call zip#Browser(expand("<amatch>"))
+autocmd BufReadCmd *.zip 	call zip#Browser(expand("<amatch>"))
 
 source ~/.vim/config/languages.vim
 source ~/.vim/config/mappings.vim

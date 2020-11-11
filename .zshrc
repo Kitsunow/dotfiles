@@ -125,6 +125,7 @@ alias g++="g++ -std=c++17"
 alias gdb="cgdb"
 alias grep="grep --color=auto"
 alias ls="$LS $COLOR"
+alias mutt="neomutt"
 alias mv="mv -v"
 alias python="ipython"
 alias rm="rm -v"
@@ -140,15 +141,6 @@ alias update="sudo pacman -Syu && pikaur -Syu && pikaur -Scc"
 # Option aliases
 alias dpmsoff='xset s off;xset -dpms'
 alias dpmson='xset s on;xset +dpms'
-
-# config files
-alias arc="$EDITOR ~/.config/openbox/autostart"
-alias orc="$EDITOR ~/.config/openbox/rc.xml && openbox --reconfigure"
-alias omrc="$EDITOR ~/.config/openbox/menu.xml && openbox --reconfigure"
-alias obcrc="$EDITOR ~/.config/obmenu-generator/config.pl"
-alias obsrc="$EDITOR ~/.config/obmenu-generator/schema.pl"
-alias vrc="$EDITOR ~/.vimrc"
-alias zrc="$EDITOR ~/.zshrc && source ~/.zshrc"
 
 # useful
 alias ll="ls -l"
