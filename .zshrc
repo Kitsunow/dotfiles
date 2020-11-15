@@ -40,9 +40,6 @@ setopt SHARE_HISTORY
 # Allow extended globbing (like rm -- ^*.zip)
 setopt EXTENDED_GLOB
 
-# Enable Colors
-autoload -U colors && colors
-
 # Emacs-like keybindings
 bindkey -e
 bindkey "^[[1;5D" backward-word

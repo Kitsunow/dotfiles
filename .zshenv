@@ -27,6 +27,9 @@ fi
 # We don't need a history in less
 export LESSHISTFILE=-
 
+# Enable Colors
+autoload -U colors && colors
+
 # Color for Manpages (see man termcap):
 #       md   Start bold mode
 #       me   End all mode like so, us, mb, md and mr
