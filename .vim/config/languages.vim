@@ -19,10 +19,13 @@ autocmd FileType *.py set tabstop=8|set expandtab|set shiftwidth=4|set softtabst
 autocmd FileType rust set tabstop=4|set shiftwidth=4|set softtabstop=4
 
 " enable syntax highlighting for rust
-au BufNewFile,BufRead *.rs set filetype=rust
+autocmd BufNewFile,BufRead *.rs set filetype=rust
 
 " autocompletion for rust
-autocmd filetype rust nmap gd <plug>(rust-def)
-autocmd filetype rust nmap gs <plug>(rust-def-split)
-autocmd filetype rust nmap gx <plug>(rust-def-vertical)
-autocmd filetype rust nmap <leader>gd <plug>(rust-doc)
+autocmd Filetype rust nmap gd <plug>(rust-def)
+autocmd Filetype rust nmap gs <plug>(rust-def-split)
+autocmd Filetype rust nmap gx <plug>(rust-def-vertical)
+autocmd Filetype rust nmap <leader>gd <plug>(rust-doc)
+
+" fix line breaks for mails
+autocmd FileType mail setlocal formatoptions+=w
