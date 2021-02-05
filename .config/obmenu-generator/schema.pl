@@ -40,7 +40,6 @@ our $SCHEMA = [
     {item => ['minigalaxy', 'Minigalaxy', 'io.github.sharkwouter.Minigalaxy']},
     {item => ['spotify', 'Spotify', 'spotify-client']},
     {item => ['steam', 'Steam', 'steam']},
-    {item => ['teamspeak3', 'Teamspeak 3', 'teamspeak3']},
     {item => ["$terminal --listen-on unix:/tmp/mykitty", 'Terminal', 'utilities-terminal']},
 
     {sep => 'Categories'},
