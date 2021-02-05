@@ -43,7 +43,7 @@ autocmd CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,menu,longest,preview
 
 " remove trailing whitespace when saving file
-autocmd BufWritePre * :%s/\s\+$//e
+autocmd BufWritePre c,cpp,h,python :%s/\s\+$//e
 
 " Autosource certain configs on write
 autocmd BufWritePost $HOME/.vimrc source $HOME/.vimrc
